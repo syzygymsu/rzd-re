@@ -42,10 +42,11 @@ class Transport {
 			case 'OK':
 				return $json;
 			case 'RID':
-				$get = ['rid' => $json['rid']];
+				$get = ['rid' => $this->getJsonRid($json)];
 				$post = null;
 				usleep(200000);
 				break;
+			case 'FAIL':
 			case 'Error':
 				throw new \Exception(sprintf(
 						'Call failed: %s',
@@ -60,11 +61,8 @@ class Transport {
 		} while(true);
 	}
 
-	public function formatDate(Date $date) {
-		return sprintf(
-				'%2d.%2d.%4d',
-				$date->day, $date->month, $date->year
-		);
+	public static function formatDate(\DateTime $dt) {
+		return $dt->format('d.m.Y');
 	}
 
 	/**
@@ -77,5 +75,14 @@ class Transport {
 		$url = $this->base_url . $uri;
 
 		return $this->session->request($url, $get, $post);
+	}
+
+	private function getJsonRid($json) {
+		foreach (['rid', 'RID'] as $key) {
+			if (isset($json[$key])) {
+				return $json[$key];
+			}
+		}
+		throw new \Exception('`rid` not found');
 	}
 }
