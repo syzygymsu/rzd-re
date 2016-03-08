@@ -44,5 +44,7 @@ class TicketSearchTest extends \PHPUnit_Framework_TestCase {
 				$transfer['time0'],
 				$transfer['number']
 		);
+
+		$api->auth()->authenticate(RZD_LOGIN, RZD_PASS);
 	}
 }

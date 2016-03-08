@@ -18,6 +18,11 @@ class API {
 	 */
 	private $ticket_search;
 
+	/**
+	 * @var Auth
+	 */
+	private $auth;
+
 	public function __construct() {
 		$base_url = 'https://pass.rzd.ru/';
 
@@ -26,6 +31,7 @@ class API {
 		$this->transport = new Transport($this->session, $base_url);
 
 		$this->ticket_search = new TicketSearch($this->transport);
+		$this->auth = new Auth($this->transport);
 	}
 
 	/**
@@ -33,5 +39,12 @@ class API {
 	 */
 	public function ticketSearch() {
 		return $this->ticket_search;
+	}
+
+	/**
+	 * @return Auth
+	 */
+	public function auth() {
+		return $this->auth;
 	}
 }
