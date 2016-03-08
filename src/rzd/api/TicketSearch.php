@@ -71,11 +71,11 @@ class TicketSearch {
 	}
 
 	/**
-	 * @param string $from
-	 * @param string $to
-	 * @param string $date
-	 * @param string $time
-	 * @param string $number
+	 * @param string $from Идентификатор станции отправления
+	 * @param string $to Идентификатор станции прибытия
+	 * @param string $date Дата отправления
+	 * @param string $time Время отправления
+	 * @param string $number Номер маршрута
 	 */
 	public function getTransferDetails($from, $to, $date, $time, $number) {
 		$args = [
