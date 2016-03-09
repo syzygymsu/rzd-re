@@ -69,7 +69,7 @@ class Transport {
 	 * @param string $uri
 	 * @param array $get
 	 * @param array|null $post
-	 * @return string
+	 * @return \rzd\http\Response
 	 */
 	public function performSimpleCall($uri, $get = [], $post = null) {
 		$url = $this->base_url . $uri;

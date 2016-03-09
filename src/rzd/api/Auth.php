@@ -36,4 +36,58 @@ class Auth {
 			));
 		}
 	}
+
+	/**
+	 * @return array
+	 */
+	public function getCustomerDetails() {
+		$res = $this->transport->performSimpleCall(
+				'selfcare/editProfile/ru'
+		);
+
+		$data = [];
+
+		$dom = new \DOMDocument();
+		@$dom->loadHTML($res->contents);
+
+		$xpath = new \DOMXPath($dom);
+		foreach ($xpath->query('//form[@class="selfcareForm selfcareForm-profile"]//input') as $elem) {
+			$name = $elem->getAttribute('name');
+			$value = $elem->getAttribute('value');
+			$data[$name] = $value;
+		}
+		foreach (['userpassword', 'userpassword_CONFIRM', 'DATA'] as $key) {
+			unset($data[$key]);
+		}
+
+		foreach (['GENDER_ID', 'QUESTION_ID'] as $select) {
+			$option = $xpath->query(
+					'//form[@class="selfcareForm selfcareForm-profile"]' .
+					'//select[@name="'.$select.'"]//option[@selected="true"]'
+			);
+			$data[$select] = $option->item(0)->getAttribute('value');
+		}
+
+		return $data;
+	}
+
+	public function saveCustomerDetails($details) {
+		$args = $details;
+
+		$res = $this->transport->performSimpleCall(
+				'selfcare/editProfile/ru',
+				[], $args
+		);
+
+		$dom = new \DOMDocument();
+		@$dom->loadHTML($res->contents);
+		$xpath = new \DOMXPath($dom);
+
+		$warning = $xpath->query('//*[@class="warningBlock"]');
+		$message = $warning->item(0)->textContent;
+
+		if ($message !== 'Профиль пользователя успешно изменен') {
+			throw new \Exception('Failed to save customer details: ' . $message);
+		}
+	}
 }

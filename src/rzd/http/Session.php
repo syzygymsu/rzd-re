@@ -54,6 +54,13 @@ class Session {
 		$response->code = \curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 		$response->redirect = \curl_getinfo($this->curl, CURLINFO_REDIRECT_URL);
 
+		if (!in_array($response->code, [200, 302])) {
+			throw new \Exception(sprintf(
+					'Unexpected HTTP code: %d',
+					$response->code
+			));
+		}
+
 		return $response;
 	}
 
