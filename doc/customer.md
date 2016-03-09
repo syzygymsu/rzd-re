@@ -5,7 +5,7 @@
 
 [Реализация клиента](../src/rzd/api/Auth.php)
 
-[Пример использования в тестах](../test/rzd/CustomerDetails.php)
+[Пример использования в тестах](../test/rzd/CustomerDetailsTest.php)
 
 ## Аутентификация
 
