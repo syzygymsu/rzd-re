@@ -2,7 +2,7 @@
 
 namespace rzd\test;
 
-class CustomerDetails extends \PHPUnit_Framework_TestCase {
+class CustomerDetailsTest extends \PHPUnit_Framework_TestCase {
 	public function testCustomerDetails() {
 		$api = new \rzd\api\API();
 

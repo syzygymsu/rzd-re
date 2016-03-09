@@ -1,13 +1,13 @@
 ## Общие факты
 
 Сайт использует кодировку utf-8 для всех запросов и ответов.
-Для POST-запросов обычно используется формат application/x-www-form-urlencoded, а другие не поддерживаются.
+Для POST-запросов *обычно* используется формат application/x-www-form-urlencoded, а другие не поддерживаются.
 Параметры запросов могут отправляться как в адресе страницы (GET), так и
 в отправляемых данных (POST), и оба метода дают одинаковый результат.
 
 Для записи дат используется формат "`d.m.Y`", для времени - "`H:i`" (в нотации php-функции date)
 
-Далее все адреса указываются относительно базового адреса `https://pass.rzd.ru/`.
+В документации все адреса указываются относительно базового адреса `https://pass.rzd.ru/`.
 
 ## Запросы с RID
 
@@ -38,10 +38,10 @@
 
 Первоначальный запрос:
 
-	https://pass.rzd.ru/timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&dir=0&tfl=3&checkSeats=1&code0=2000000&dt0=08.03.2016&code1=2004000
+	timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&dir=0&tfl=3&checkSeats=1&code0=2000000&dt0=08.03.2016&code1=2004000
 	{"result":"RID","rid":"470407923",...}
 
 Повторный запрос с выданным rid=470407923:
 
-	https://pass.rzd.ru/timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&rid=470414517
+	timetable/public/ru?STRUCTURE_ID=735&layer_id=5371&rid=470414517
 	{"result":"OK",...}
