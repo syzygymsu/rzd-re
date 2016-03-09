@@ -26,11 +26,11 @@ class Auth {
 		// TODO: возможно, лучше проверять установку новой куки
 		switch ($res->redirect) {
 		case 'https://pass.rzd.ru/timetable/logonErr':
-			throw new TransportException('Invalid credentials');
+			throw new \Exception('Invalid credentials');
 		case 'https://pass.rzd.ru/timetable/j_security_check/':
 			return;
 		default:
-			throw new TransportException(sprintf(
+			throw new \Exception(sprintf(
 					'Unexpected redirect to: "%s"',
 					$res->redirect
 			));
